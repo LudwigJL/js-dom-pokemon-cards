@@ -44,12 +44,24 @@ function render(){
         let speed = document.createElement('li')
         speed.innerHTML = 'SPEED: ' + pokemon.stats[5].base_stat
 
+        let appearanceGamesUl = document.createElement('ul')
+
+        
+        games = getGames(pokemon)
+        for(let i = 0; i < games.length; i++){
+            let appearanceGames = document.createElement('li')
+            appearanceGames.innerHTML = games[i] + ', '
+            appearanceGamesUl.appendChild(appearanceGames)
+        }
+
+
         attributes.appendChild(healthPoints)
         attributes.appendChild(attack)
         attributes.appendChild(defense)
         attributes.appendChild(specialAttack)
         attributes.appendChild(specialDefense)
         attributes.appendChild(speed)
+        attributes.appendChild(appearanceGamesUl)
 
         pokemonLi.appendChild(title)
         pokemonLi.appendChild(frontImage)
@@ -58,6 +70,19 @@ function render(){
         allPokemons.appendChild(pokemonLi)
     }
 }
+
+function getGames(pokemon) {
+    const games = []
+
+    for(let i = 0; i < pokemon.game_indices.length; i++){
+
+        games.push(pokemon.game_indices[i].version.name)
+    }
+
+    return games
+}
+
+console.log(getGames(data[0]))
 
 function main() {
     render()
