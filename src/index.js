@@ -8,6 +8,15 @@ function render(){
         const pokemonLi = document.createElement('li')
         pokemonLi.className = 'card'
         pokemonLi.style.listStyle = 'none'
+        pokemonLi.addEventListener ('click', () => {
+            if(setImg > 0){
+                image.src = frontImg
+                setImg--
+            } else{
+                image.src = backImg
+                setImg++
+            }
+        })
 
         pokemonLi.setAttribute('id', pokemon.id)
 
@@ -15,11 +24,19 @@ function render(){
         title.className = 'card--title'
         title.innerHTML = pokemon.name
 
-        let frontImage = document.createElement('img')
-        frontImage.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonLi.id}.png`
-        frontImage.className = 'card--img'
-        frontImage.width = 256
+        var cardImage = Array(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonLi.id}.png`, `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${pokemonLi.id}.png`)
 
+        let image = document.createElement('img')
+        let frontImg = cardImage[0]
+        let backImg = cardImage[1]
+        var setImg = 0
+
+        image.src = cardImage[0]
+        image.className = 'card--img'
+        image.width = 256
+
+        console.log(cardImage)
+       
 
         //Stats
         const attributes = document.createElement('ul')
@@ -64,7 +81,7 @@ function render(){
         attributes.appendChild(appearanceGamesUl)
 
         pokemonLi.appendChild(title)
-        pokemonLi.appendChild(frontImage)
+        pokemonLi.appendChild(image)
         pokemonLi.appendChild(attributes)
 
         allPokemons.appendChild(pokemonLi)
@@ -75,14 +92,15 @@ function getGames(pokemon) {
     const games = []
 
     for(let i = 0; i < pokemon.game_indices.length; i++){
-
         games.push(pokemon.game_indices[i].version.name)
     }
 
     return games
 }
 
-console.log(getGames(data[0]))
+function flipCard(){
+
+}
 
 function main() {
     render()
