@@ -14,8 +14,7 @@ function render(){
                 setImg--
             } else{
                 image.src = backImg
-                setImg++
-            }
+                setImg++ }
         })
 
         pokemonLi.setAttribute('id', pokemon.id)
@@ -33,10 +32,7 @@ function render(){
 
         image.src = cardImage[0]
         image.className = 'card--img'
-        image.width = 256
-
-        console.log(cardImage)
-       
+        image.width = 256       
 
         //Stats
         const attributes = document.createElement('ul')
@@ -96,10 +92,6 @@ function getGames(pokemon) {
     }
 
     return games
-}
-
-function flipCard(){
-
 }
 
 function main() {
